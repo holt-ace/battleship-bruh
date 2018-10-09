@@ -18,13 +18,20 @@ if choice == "p"
       sleep(0.1)
       print "."
     end
-    print "thinking"
+    print "problems detected..."
     5.times do
       sleep(1.5)
       print "."
     end
     puts
     puts "Failed to exit."
-    puts "**Computer SHUTDOWN IMMINENT**"
+    puts "ERROR: **Computer SHUTDOWN IMMINENT**"
+    puts "60 seconds remaining. Enter bitcoin API key now:"
+    $stdin.gets.chomp
+    print "> "
+    puts "Shutdown halted. Say goodbye to your bitcoin!"
+    sleep(3)
+    puts "KIDDING. Game Terminated."
+
     exit
 end
