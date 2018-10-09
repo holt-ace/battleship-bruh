@@ -5,6 +5,7 @@ require './lib/ships'
 
 class ShipsTest < Minitest::Test
   def setup
+
     @destroyer = Ships.new(3, [:A1, :A2, :A3])
     @canoe = Ships.new(2, [:D3, :D4])
   end
@@ -23,4 +24,19 @@ class ShipsTest < Minitest::Test
   #
   #   assert_equal ["A1", "A2", "A3"], @destroyer.place_ships
   # end
+
+
+  # test the input if needed later.
+  # def simulate_stdin(*inputs)
+  #   io = StringIO.new
+  #   inputs.flatten.each { |str| io.puts(str) }
+  #   io.rewind
+  #
+  #   actual_stdin = $stdin
+  #   $stdin = io
+  #   yield
+  # ensure
+  #   $stdin = actual_stdin
+# end
+
 end
