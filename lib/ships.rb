@@ -1,7 +1,6 @@
-
 class Ships
   attr_reader :length, :position, :hash_chart
-  def initialize(length, position, hash_chart)
+  def initialize(length, position)
     @length = length
     @position = []
     @hash_chart = {
@@ -21,16 +20,15 @@ class Ships
                     D2: D2,
                     D3: D3,
                     D4: D4
-                   }
+                  }
   end
 
   def place_ships
     slot_1 = $stdin.gets.chomp
-      if slot_1 == ("A1".. "A")
     slot_2 = $stdin.gets.chomp
     slots = [slot_1, slot_2]
     @position << slots
-      end
+
   end
 
 end
