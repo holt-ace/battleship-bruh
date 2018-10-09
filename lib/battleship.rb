@@ -12,16 +12,19 @@ if choice == "p"
   elsif choice == "i"
     puts "instruction"
     exit if choice == "q"
-  # elsif choice == "q"
-  #   print "attempting to exit..."
-  #   sleep(1)
-  #   print ".."
-  #   sleep(1.5)
-  #   print "..."
-  #   sleep(2)
-  #   print "...."
-  #   sleep(2.5)
-  #   print "....."
-  #   puts "ok fine. cya"
-  #   exit
-  end
+  elsif choice == "q"
+    print "attempting to exit"
+    35.times do
+      sleep(0.1)
+      print "."
+    end
+    print "thinking"
+    5.times do
+      sleep(1.5)
+      print "."
+    end
+    puts
+    puts "Failed to exit."
+    puts "**Computer SHUTDOWN IMMINENT**"
+    exit
+end
