@@ -1,8 +1,10 @@
 require './lib/game'
 
 
-
-if choice == "p"
+game_1 = Game.new
+game_1.introduction
+ choice = $stdin.gets.chomp
+ if choice == "p"
     puts "Welcome to Battleship!!"
     sleep(2)
     puts "You are now in command of a Destroyer and a civilian canoe."
