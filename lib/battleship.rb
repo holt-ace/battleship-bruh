@@ -12,16 +12,17 @@ choice = $stdin.gets.chomp
     puts "The computer is your opponent. Placing computer ships..."
   elsif choice == "i"
     puts "instruction"
-  elsif choice == "q"
-    print "attempting to exit..."
-    sleep(1)
-    print ".."
-    sleep(1.5)
-    print "..."
-    sleep(2)
-    print "...."
-    sleep(2.5)
-    print "....."
-    puts "ok fine. cya"
-    exit
+    exit if choice == "q"
+  # elsif choice == "q"
+  #   print "attempting to exit..."
+  #   sleep(1)
+  #   print ".."
+  #   sleep(1.5)
+  #   print "..."
+  #   sleep(2)
+  #   print "...."
+  #   sleep(2.5)
+  #   print "....."
+  #   puts "ok fine. cya"
+  #   exit
   end
