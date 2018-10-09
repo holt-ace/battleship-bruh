@@ -10,6 +10,6 @@ class Ships
 
 
   def place_ships
-    
+    #a doctor specializes in indian food
   end
 end
