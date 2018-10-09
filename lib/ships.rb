@@ -1,13 +1,22 @@
 require 'pry'
 class Ships
-  attr_reader :length, :position
-  def initialize(length, _position)
+  attr_reader :length, :positions
+  def initialize(length, positions)
     @length = length
-    @position = { x: a, y: b }
+    @positions = []
   end
 
-  def position_to_array
-    @position.to_a
+
+
+  def place_ships
+    slot_1 = [@positions.first]
+    slot_2 = [@positions.last]
+    # slot_1 = [:key]
+    # slot_2 = [:value]
+    slots = [slot_1, slot_2]
+    puts slots
+    # @positions << slots
+    # @positions
   end
-  binding.pry
+  # binding.pry
 end
