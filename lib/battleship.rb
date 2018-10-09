@@ -9,19 +9,29 @@ if choice == "p"
     puts "You are now in command of a Destroyer and a civilian canoe."
     sleep(3)
     puts "The computer is your opponent. Placing computer ships..."
-  #elsif choice == "i"
-    # puts "instruction"
-    # exit if choice == "q"
+  elsif choice == "i"
+    puts "instruction"
+    exit if choice == "q"
   elsif choice == "q"
-    print "attempting to exit..."
-    sleep(1)
-    print ".."
-    sleep(1.5)
-    print "..."
-    sleep(2)
-    print "...."
-    sleep(2.5)
-    print "....."
-    puts "ok fine. cya"
+    print "attempting to exit"
+    35.times do
+      sleep(0.1)
+      print "."
+    end
+    print "problems detected..."
+    5.times do
+      sleep(1.5)
+      print "."
+    end
+    puts
+    puts "Failed to exit."
+    puts "ERROR: **Computer SHUTDOWN IMMINENT**"
+    puts "60 seconds remaining. Enter bitcoin API key now:"
+    $stdin.gets.chomp
+    print "> "
+    puts "Shutdown halted. Say goodbye to your bitcoin!"
+    sleep(3)
+    puts "KIDDING. Game Terminated."
+
     exit
-  end
+end
