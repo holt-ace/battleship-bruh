@@ -9,6 +9,9 @@ choice = $stdin.gets.chomp
     puts "You are now in command of a Destroyer and a civilian canoe."
     sleep(3)
     puts "The computer is your opponent. Placing computer ships..."
+    sleep(3)
+    game_1.empty
+    # print table with randomly populated computer ships (matching the given spec parameters)
   elsif choice == "i"
     puts "instruction"
     exit if choice == "q"
@@ -17,6 +20,20 @@ choice = $stdin.gets.chomp
     35.times do
       sleep(0.1)
       print "."
-  end
-      exit
-  end
+    end
+    print "problems detected..."
+    5.times do
+      sleep(1.5)
+      print "."
+    end
+    puts
+    puts "Failed to exit."
+    puts "ERROR: **Computer SHUTDOWN IMMINENT**"
+    puts "60 seconds remaining. Enter bitcoin API key now:"
+    $stdin.gets.chomp
+    print "> "
+    puts "Shutdown halted. Say goodbye to your bitcoin!"
+    sleep(3)
+    puts "KIDDING. Game Terminated."
+    exit
+end
