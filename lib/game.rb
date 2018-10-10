@@ -12,6 +12,4 @@ class Game
     place_computer_ships
   end
 
-
-
 end
