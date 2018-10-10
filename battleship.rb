@@ -10,6 +10,9 @@ game_1.introduction
     puts "You are now in command of a Destroyer and a civilian canoe."
     sleep(3)
     puts "The computer is your opponent. Placing computer ships..."
+    sleep(3)
+    game_1.empty
+    # print table with randomly populated computer ships (matching the given spec parameters)
   elsif choice == "i"
     puts "instruction"
     exit if choice == "q"
@@ -33,6 +36,8 @@ game_1.introduction
     puts "Shutdown halted. Say goodbye to your bitcoin!"
     sleep(3)
     puts "KIDDING. Game Terminated."
-
     exit
+
+
+
 end
