@@ -36,5 +36,8 @@ choice = $stdin.gets.chomp
     sleep(3)
     puts "KIDDING. Game Terminated."
     exit
+<<<<<<< HEAD
     
+=======
+>>>>>>> fe4aab35cfe2b5224788a060804ed80e899b18a8
 end
