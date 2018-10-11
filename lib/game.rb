@@ -20,7 +20,7 @@ class Game
     else
       "ERROR: Invalid selection. Please try again."
     end
-    introduction
+    unintentional_introduction
   end
   def player_choice_play
     puts "Welcome to Battleship!!"
@@ -31,7 +31,17 @@ class Game
     sleep(3)
   end
   def player_choice_instructions
-    puts "instructions"
+    puts "WELCOME TO THE NAVY, NEW PHISH. ;)"
+    sleep(2.5)
+    puts "Summary:"
+    sleep(0.5)
+    puts "Battleship is a classic two player game where players try to sink their opponent’s navy ships. Your opponent in this game is a computer. The game includes two ships - a Canoe and a Destroyer.
+    Battleship is an easy game for all ages. The basic object of this game is to hide your two ship fleet somewhere on your ocean (board),
+    and by calling out basic coordinates, find your opponent’s fleet before they find yours."
+    sleep(5)
+
+    puts "Follow along and the game will guide you on what to do. It's easy to play, but can you win?"
+    sleep(10)
   end
   def player_choice_quit
     print "attempting to exit"
