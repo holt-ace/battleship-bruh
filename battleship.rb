@@ -38,6 +38,4 @@ game_1.introduction
     puts "KIDDING. Game Terminated."
     exit
 
-
-
 end

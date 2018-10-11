@@ -16,7 +16,7 @@ class ShipsTest < Minitest::Test
   end
 
   def test_if_the_destroyer_is_placed
-
+    
     assert_equal ["A1", "A2", "A3"], @destroyer.position
   end
 end
