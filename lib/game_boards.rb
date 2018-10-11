@@ -1,7 +1,7 @@
 class Game_Boards
 
 
-  def print_board(#player or computer)
+  def print_board#(player or computer)
   end
 
   def empty_board
