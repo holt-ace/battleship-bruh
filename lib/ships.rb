@@ -1,9 +1,9 @@
 class Ships
 
-  attr_reader :length, :ship_location, :hash_chart
-  def initialize(length, position)
+  attr_reader :length, :ship_location #:hash_chart
+  def initialize(length, ship_location)
     @length = length
-    @ship_location = []
+    @ship_location = ship_location
 #     @hash_chart = {
 #                     A1: A1,
 #                     A2: A2,
