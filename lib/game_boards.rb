@@ -29,10 +29,13 @@ class Game_Boards
     row_3 = [@hash_chart[A1], @hash_chart[A2], @hash_chart[A3], @hash_chart[A4]]
     row_4 = [@hash_chart[B1], etc]
     row_5 =
-    row_6 = 
+    row_6 =
     row_7 = row_1
 
   end
+
+  def placement_rules
+    if 
 
 
 end
