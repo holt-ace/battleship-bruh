@@ -6,6 +6,8 @@ class Game
     print "> "
    end
 
+   #consider utilizing modules
+
 
 #figure out a way to take in a board object then prints the ASCII
   def print_computer_board
