@@ -5,7 +5,7 @@ class Game_Boards
   end
 
   @hash_chart = {
-                     A1: S,
+                     A1: A1,
                      A2: S,
                      A3: A3,
                      A4: A4,
@@ -43,26 +43,29 @@ class Game_Boards
      end
   end
 
-  def store_hash_values
-    if player_entry_for_destroyer == [:A1, :A3]
-      @hash_chart.store(:A1..:A3, "S")
-      #stores a new key:value pair in the hash
-      #if this ^^^ works I will be stoked. not sure if you can take-
-      #a range as an argument
-    elsif player_entry_for_destroyer == [:A2, :A4]
-      @hash_chart.store(:A2..:A4, "S")
-    elsif player_entry_for_destroyer == [:B1, :B3]
-      @hash_chart.store(:B1..:B3, "S")
-    elsif player_entry_for_destroyer == [:B2, :B4]
-      @hash_chart.store(:B2..:B4, "S")
-    elsif player_entry_for_destroyer == [:C1, :C3]
-      @hash_chart.store(:C1..:C3, "S")
-    elsif player_entry_for_destroyer == [:C2, :C4]
-      @hash_chart.store(:C2..:C4, "S")
-    elsif player_entry_for_destroyer == [:D1, :D3]
-      @hash_chart.store(:D1..:D3, "S")
-    elsif player_entry_for_destroyer == [:D2, :D4]
-      @hash_chart.store(:D2..:D4, "S")
+  # def store_hash_values
+  #   #transfer string to symbol with .to_sym
+  #   if player_entry_for_destroyer == [:A1, :A3]
+  #     @hash_chart[:A1] = "S"
+  #     @hash_chart[:A2] = "S"
+  #     @hash_chart[:A3] = "S"
+  #     #stores a new key:value pair in the hash
+  #     #if this ^^^ works I will be stoked. not sure if you can take-
+  #     #a range as an argument
+  #   elsif player_entry_for_destroyer == [:A2, :A4]
+  #     @hash_chart.store(:A2..:A4, "S")
+  #   elsif player_entry_for_destroyer == [:B1, :B3]
+  #     @hash_chart.store(:B1..:B3, "S")
+  #   elsif player_entry_for_destroyer == [:B2, :B4]
+  #     @hash_chart.store(:B2..:B4, "S")
+  #   elsif player_entry_for_destroyer == [:C1, :C3]
+  #     @hash_chart.store(:C1..:C3, "S")
+  #   elsif player_entry_for_destroyer == [:C2, :C4]
+  #     @hash_chart.store(:C2..:C4, "S")
+  #   elsif player_entry_for_destroyer == [:D1, :D3]
+  #     @hash_chart.store(:D1..:D3, "S")
+  #   elsif player_entry_for_destroyer == [:D2, :D4]
+  #     @hash_chart.store(:D2..:D4, "S")
 
       #only covers horizontal placement^^^^^
       #had a hard time thinking about how to do vertical

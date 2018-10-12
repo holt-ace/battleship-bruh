@@ -1,25 +1,21 @@
 class Ships
 
-  attr_reader :length, :ship_location #:hash_chart
+  attr_reader :length, :ship_location
   def initialize(length, ship_location)
     @length = length
     @ship_location = ship_location
-#
   end
 
-#   def place_ships
-#     puts "Prepare for battle! Place your DESTROYER."
-#     print "> "
-#     slot_1 = $stdin.gets.chomp
-#       if slot_1 == A1..D4
-#         @ship_location << slot_1
-#       end
-#     slot_2 = $stdin.gets.chomp
-#       if slot_2 == A1..D4 && slot_2.include? != slot_1 #prevents ship stacking
-#         @ship_location << slot_2
-#       end
-#     @ship_location
+  def places_destroyer
+    puts "Prepare for battle! Place your DESTROYER."
+    print "> "
+    entry = $stdin.gets.chomp
+    #break string into seperate symbols
+    #.split
+    #iterate throuugh the array and change each element to a symbol
+    # `a.map{|x|x.to_sym}`
+    #return hash_chart changes
 
-#   end
+  end
 
 end
