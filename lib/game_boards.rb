@@ -31,14 +31,19 @@ class Game_Boards
     row_5 =
     row_6 =
     row_7 = row_1
-
+    row_8 = ["S = Ship", "H = Hit", "M = Miss"]
+    print row_8.join(', ')
   end
 
+#computer and player1 need to adhere to this method's rules
+  #ships 1) cant wrap around board, 2) they can't stack, 3) destroyer takes 3 slots (head+1 or tail-1),
+  #4) ships can be laid either vertically or horizontally
   def placement_rules
-    #conditionals that eliminate the player from placing his ships-
-    #in an overlapping, wrapping around the board, or physically  -
-    #impossible fashion
-     if player_entry == []
+    # 1) can't wrap around the board
+      if destroyer_tail == row_3[3] #then it can't be placed horizontally
+    # 2) can't stack
+    # 3) destroyer takes 3 slots
+    # 4) canoe takes 2 slots
 
      end
   end
