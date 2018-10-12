@@ -26,11 +26,11 @@ class Game
   end
   def player_choice_play
     puts "You entered 'play'. Entering game mode..."
-    sleep(2)
+    sleep(3)
     puts "You are now in command of a Destroyer and a civilian canoe."
     sleep(3)
-    puts "The computer is your opponent. Here is an example board."
-    sleep(2)
+    puts "The computer is your opponent. Here is an example board:"
+    sleep(3)
     board_1 = Game_Boards.new
     board_1.print_intro_board
     puts "As you can see, there are 16 possible coordinates to attack. The computer will now place its ships..."
