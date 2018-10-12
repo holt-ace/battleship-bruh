@@ -25,7 +25,7 @@ class Game_Boards
 
   def empty_board
     row_1 = "=" * 20
-    row_2 =
+    row_2 = 
     row_3 = [@hash_chart[:A1], @hash_chart[:A2], @hash_chart[:A3], @hash_chart[:A4]]
     row_4 = [@hash_chart[:B1], etc]
     row_5 =
@@ -34,6 +34,9 @@ class Game_Boards
 
   end
 
+#computer and player1 need to adhere to this method's rules
+  #ships 1) cant wrap around board, 2) they can't stack, 3) destroyer takes 3 slots (head+1 or tail-1), 
+  #4) ships can be laid either vertically or horizontally
   def placement_rules
     #conditionals that eliminate the player from placing his ships-
     #in an overlapping, wrapping around the board, or physically  -
