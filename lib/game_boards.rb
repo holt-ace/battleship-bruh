@@ -34,8 +34,10 @@ class Game_Boards
 
   end
 
+#computer and player1 need to adhere to this method. consider making place_board a module and calling this method?
   def placement_rules
-    if 
+#ships cant wrap around board, they can't stack, destroyer takes 3 slots (head+1 or tail-1), etc
+    if
 
 
 end

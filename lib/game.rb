@@ -39,7 +39,6 @@ class Game
     Battleship is an easy game for all ages. The basic object of this game is to hide your two ship fleet somewhere on your ocean (board),
     and by calling out basic coordinates, find your opponent’s fleet before they find yours."
     sleep(5)
-
     puts "Follow along and the game will guide you on what to do. It's easy to play, but can you win?"
     sleep(10)
   end
