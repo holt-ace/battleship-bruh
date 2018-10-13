@@ -1,3 +1,5 @@
+require './lib/game_boards'
+
 class Ships
 
   attr_reader :length, :ship_location #:hash_chart
@@ -7,6 +9,7 @@ class Ships
 #
   end
 
+  
 #   def place_ships
 #     puts "Prepare for battle! Place your DESTROYER."
 #     print "> "

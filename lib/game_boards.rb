@@ -48,62 +48,79 @@ class Game_Boards
     print "\n"
   end
 
-# computer and player1 need to adhere to this method's rules
-#   ships 1) cant wrap around board, 2) they can't stack, 3) destroyer takes 3 slots (head+1 or tail-1),
-#   4) ships can be laid either vertically or horizontally
-  def placement_rules_computer_destroyer
-    # 1) can't wrap around the board
-    # 2) can't stack
-    # 3) destroyer takes 3 slots
-    # 4) canoe takes 2 slots
-
-     end
+  def computer_place_destroyer
+    coordinates_array = @hash_chart.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
+    random_coord = coordinates_array.sample
+    # random_coord = :C3
+    if random_coord == :A1 || random_coord == :A2 || random_coord == :B1 || random_coord == :B2
+      h_middle = coordinates_array[coordinates_array.index(random_coord) + 1]
+      h_tail = coordinates_array[coordinates_array.index(random_coord) + 2]
+      horizontal_layout = [random_coord, h_middle, h_tail]
+      v_middle = coordinates_array[coordinates_array.index(random_coord) + 4]
+      v_tail = coordinates_array[coordinates_array.index(random_coord) + 8]
+      vertical_layout = [random_coord, v_middle, v_tail]
+      layout_options = [horizontal_layout, vertical_layout]
+      comp_destroyer_pos = layout_options.sample
+    elsif random_coord == :C3 || random_coord == :C4 || random_coord == :D3 || random_coord == :D4
+      h_middle = coordinates_array[coordinates_array.index(random_coord) - 1]
+      h_tail = coordinates_array[coordinates_array.index(random_coord) - 2]
+      v_middle = coordinates_array[coordinates_array.index(random_coord) - 4]
+      v_tail = coordinates_array[coordinates_array.index(random_coord) - 8]
+      horizontal_layout = [h_tail, h_middle, random_coord]
+      vertical_layout = [v_tail, v_middle, random_coord]
+      layout_options = [horizontal_layout, vertical_layout]
+      comp_destroyer_pos = layout_options.sample
+    elsif random_coord == :A3 || random_coord == :A4 || random_coord == :B3 || random_coord == :B4
+      v_middle = coordinates_array[coordinates_array.index(random_coord) + 4]
+      v_tail = coordinates_array[coordinates_array.index(random_coord) + 8]
+      vertical_layout = [random_coord, v_middle, v_tail]
+      h_middle = coordinates_array[coordinates_array.index(random_coord) - 1]
+      h_tail = coordinates_array[coordinates_array.index(random_coord) - 2]
+      horizontal_layout = [h_tail, h_middle, random_coord]
+      layout_options = [horizontal_layout, vertical_layout]
+      comp_destroyer_pos = layout_options.sample
+    elsif random_coord == :C1 || random_coord == :C2 || random_coord == :D1 || random_coord == :D2
+      h_middle = coordinates_array[coordinates_array.index(random_coord) + 1]
+      h_tail = coordinates_array[coordinates_array.index(random_coord) + 2]
+      v_middle = coordinates_array[coordinates_array.index(random_coord) - 4]
+      v_tail = coordinates_array[coordinates_array.index(random_coord) - 8]
+      vertical_layout = [v_tail, v_middle, random_coord]
+      horizontal_layout = [random_coord, h_middle, h_tail]
+      layout_options = [horizontal_layout, vertical_layout]
+      comp_destroyer_pos = layout_options.sample
+    end
+    @hash_chart[comp_destroyer_pos[0]] = "S"
+    @hash_chart[comp_destroyer_pos[1]] = "S"
+    @hash_chart[comp_destroyer_pos[2]] = "S"
+    sleep(2.5)
   end
 
-  def placement_rules_computer_canoe
-  end
+  def computer_place_canoe
+# and the canoe cannot be placed on an S.
 
-  def placement_rules_player_destroyer
-  end
-
-  def placement_rules_player_canoe
-  end
-
-
-  # def store_hash_values
-  #   if player_entry_for_destroyer == [:A1, :A3]
-  #     @hash_chart.store(:A1..:A3, "S")
-  #     #stores a new key:value pair in the hash
-  #     #if this ^^^ works I will be stoked. not sure if you can take-
-  #     #a range as an argument
-  #   elsif player_entry_for_destroyer == [:A2, :A4]
-  #     @hash_chart.store(:A2..:A4, "S")
-  #   elsif player_entry_for_destroyer == [:B1, :B3]
-  #     @hash_chart.store(:B1..:B3, "S")
-  #   elsif player_entry_for_destroyer == [:B2, :B4]
-  #     @hash_chart.store(:B2..:B4, "S")
-  #   elsif player_entry_for_destroyer == [:C1, :C3]
-  #     @hash_chart.store(:C1..:C3, "S")
-  #   elsif player_entry_for_destroyer == [:C2, :C4]
-  #     @hash_chart.store(:C2..:C4, "S")
-  #   elsif player_entry_for_destroyer == [:D1, :D3]
-  #     @hash_chart.store(:D1..:D3, "S")
-  #   elsif player_entry_for_destroyer == [:D2, :D4]
-  #     @hash_chart.store(:D2..:D4, "S")
-  #
-  #     #only covers horizontal placement^^^^^
-  #     #had a hard time thinking about how to do vertical
-  #
-  #     #may need to use .rehash method after changing key:value pairs?
-  #
-  #     #the .rehash method: Rebuilds the hash based on the current hash-
-  #     #values for each key. If values of key objects have changed since-
-  #     #they were inserted, this method will reindex hash. If Hash#rehash-
-  #     #is called while an iterator is traversing the hash, a RuntimeError-
-  #     #will be raised in the iterator.
-  #
-  #
-  #   end
   # end
+  #
+  # def computer_place_canoe
+  # puts "Placing mycanoe..."
+  # end
+  #
+  def player_place_canoe
+    puts "I have laid out my ships on the grid."
+    puts "You now need to layout your two ships."
+    puts "The first is two units long and the"
+    puts "second is three units long."
+    puts "The grid has A1 at the top left and D4 at the bottom right."
+    sleep(3)
+    puts "Enter the squares for the two-unit ship:"
+    print "> "
+    player_canoe_entry = $stdin.gets.chomp
+  end
+
+  # def player_canoe_rules
+  #   if
+  # def player_place_canoe
+  # end
+
+
 
 end
