@@ -49,58 +49,46 @@ class Game_Boards
   end
 
   def computer_place_destroyer
-    # 1) can't wrap around the board
     coordinates_array = @hash_chart.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
     random_coord = coordinates_array.sample
     head = random_coord
-    if random_coord == :A1,:A2,:B1,:B2
+    if random_coord == :A1 || :A2 || :B1 || :B2
       h_middle = coordinates_array[coordinates_array.index(head) + 1]
       h_tail = coordinates_array[coordinates_array.index(head) + 2]
-      horizontal_layout = [head, h_middle, h_tail]
       v_middle = coordinates_array[coordinates_array.index(head) + 4]
       v_tail = coordinates_array[coordinates_array.index(head) + 8]
-      vertical_layout = [head, v_middle, v_tail]
-      layout_options = [horizontal_layout, vertical_layout]
-      destroyer_position = layout_options.sample
     end
-    if random_coord == :C3, :C4, :D3, :D4
+    if random_coord == :C3 || :C4 || :D3 || :D4
       h_middle = coordinates_array[coordinates_array.index(head) - 1]
       h_tail = coordinates_array[coordinates_array.index(head) - 2]
-      horizontal_layout = [h_tail, h_middle, head]
       v_middle = coordinates_array[coordinates_array.index(head) - 4]
       v_tail = coordinates_array[coordinates_array.index(head) - 8]
-      vertical_layout = [v_tail, v_middle, head]
-      layout_options = [horizontal_layout, vertical_layout]
-      destroyer_position = layout_options.sample
     end
-    if random_coord == :A3, :A4, :B3, :B4
+    if random_coord == :A3 || :A4 || :B3 || :B4
       v_middle = coordinates_array[coordinates_array.index(head) + 4]
       v_tail = coordinates_array[coordinates_array.index(head) + 8]
-      vertical_layout = [head, v_middle, v_tail]
       h_middle = coordinates_array[coordinates_array.index(head) - 1]
       h_tail = coordinates_array[coordinates_array.index(head) - 2]
-      horizontal_layout = [h_tail, h_middle, head]
-      destroyer_position = layout_options.sample
     end
-    if random_coord == :C1, :C2, :D1, :D2
+    if random_coord == :C1 || :C2 || :D1 || :D2
       h_middle = coordinates_array[coordinates_array.index(head) + 1]
       h_tail = coordinates_array[coordinates_array.index(head) + 2]
-      horizontal_layout = [head, h_middle, h_tail]
       v_middle = coordinates_array[coordinates_array.index(head) - 4]
       v_tail = coordinates_array[coordinates_array.index(head) - 8]
-      vertical_layout = [h_tail, v_middle, head]
-      destroyer_position = layout_options.sample
     end
-    @hash_chart[destroyer_position[0]] = "S"
-    @hash_chart[destroyer_position[1]] = "S"
-    @hash_chart[destroyer_position[2]] = "S"
+    vertical_layout = [h_tail, v_middle, head]
+    horizontal_layout = [head, h_middle, h_tail]
+    layout_options = [horizontal_layout, vertical_layout]
+    comp_destroyer_pos = layout_options.sample
+    @hash_chart[comp_destroyer_pos[0]] = "S"
+    @hash_chart[comp_destroyer_pos[1]] = "S"
+    @hash_chart[comp_destroyer_pos[2]] = "S"
+    puts "The computer has placed its destroyer at #{comp_destroyer_pos}."
   end
 
-# and the canoe cannot be placed on an S
-    # 2) destroyer takes 3 slots
-     #selects a random starting coordinate for the destroyer
+# and the canoe cannot be placed on an S.
 
-  end
+  # end
 
   def computer_place_canoe
   end
