@@ -51,67 +51,57 @@ class Game_Boards
   def computer_place_destroyer
     coordinates_array = @hash_chart.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
     random_coord = coordinates_array.sample
-    head = random_coord
-    # binding.pry
+    # random_coord = :C3
     if random_coord == :A1 || random_coord == :A2 || random_coord == :B1 || random_coord == :B2
-      h_middle = coordinates_array[coordinates_array.index(head) + 1]
-      h_tail = coordinates_array[coordinates_array.index(head) + 2]
-      horizontal_layout = [head, h_middle, h_tail]
-      v_middle = coordinates_array[coordinates_array.index(head) + 4]
-      v_tail = coordinates_array[coordinates_array.index(head) + 8]
-      vertical_layout = [head, v_middle, v_tail]
+      h_middle = coordinates_array[coordinates_array.index(random_coord) + 1]
+      h_tail = coordinates_array[coordinates_array.index(random_coord) + 2]
+      horizontal_layout = [random_coord, h_middle, h_tail]
+      v_middle = coordinates_array[coordinates_array.index(random_coord) + 4]
+      v_tail = coordinates_array[coordinates_array.index(random_coord) + 8]
+      vertical_layout = [random_coord, v_middle, v_tail]
       layout_options = [horizontal_layout, vertical_layout]
       comp_destroyer_pos = layout_options.sample
-    end
-    if random_coord == :C3 || random_coord == :C4 || random_coord == :D3 || random_coord == :D4 #bugged
-      #say we get #:C4 here
-      h_middle = coordinates_array[coordinates_array.index(head) - 1]
-      h_tail = coordinates_array[coordinates_array.index(head) - 2]
-      v_middle = coordinates_array[coordinates_array.index(head) - 4]
-      v_tail = coordinates_array[coordinates_array.index(head) - 8]
-      horizontal_layout = [h_tail, h_middle, head]
-      vertical_layout = [v_tail, v_middle, head]
-      layout_options = [horizontal_layout, vertical_layout] #is the problem here?
-      comp_destroyer_pos = layout_options.sample
-      # binding.pry
-      #if we get head = :C4, for some reason it is printing comp_destroyer_pos = [:C4, :B2, :C2]. What???
-      # it is consistently printing [head, head - 6, head - 2]
-      #but in pry it works perfectly... where is it creating this new formula/extra step?
-    end
-    if random_coord == :A3 || random_coord == :A4 || random_coord == :B3 || random_coord == :B4
-      v_middle = coordinates_array[coordinates_array.index(head) + 4]
-      v_tail = coordinates_array[coordinates_array.index(head) + 8]
-      vertical_layout = [head, v_middle, v_tail]
-      h_middle = coordinates_array[coordinates_array.index(head) - 1]
-      h_tail = coordinates_array[coordinates_array.index(head) - 2]
-      horizontal_layout = [h_tail, h_middle, head]
+    elsif random_coord == :C3 || random_coord == :C4 || random_coord == :D3 || random_coord == :D4
+      h_middle = coordinates_array[coordinates_array.index(random_coord) - 1]
+      h_tail = coordinates_array[coordinates_array.index(random_coord) - 2]
+      v_middle = coordinates_array[coordinates_array.index(random_coord) - 4]
+      v_tail = coordinates_array[coordinates_array.index(random_coord) - 8]
+      horizontal_layout = [h_tail, h_middle, random_coord]
+      vertical_layout = [v_tail, v_middle, random_coord]
       layout_options = [horizontal_layout, vertical_layout]
       comp_destroyer_pos = layout_options.sample
-    end
-    if random_coord == :C1 || random_coord == :C2 || random_coord == :D1 || random_coord == :D2
-      h_middle = coordinates_array[coordinates_array.index(head) + 1]
-      h_tail = coordinates_array[coordinates_array.index(head) + 2]
-      horizontal_layout = [head, h_middle, h_tail]
-      v_middle = coordinates_array[coordinates_array.index(head) - 4]
-      v_tail = coordinates_array[coordinates_array.index(head) - 8]
-      vertical_layout = [h_tail, v_middle, head]
+    elsif random_coord == :A3 || random_coord == :A4 || random_coord == :B3 || random_coord == :B4
+      v_middle = coordinates_array[coordinates_array.index(random_coord) + 4]
+      v_tail = coordinates_array[coordinates_array.index(random_coord) + 8]
+      vertical_layout = [random_coord, v_middle, v_tail]
+      h_middle = coordinates_array[coordinates_array.index(random_coord) - 1]
+      h_tail = coordinates_array[coordinates_array.index(random_coord) - 2]
+      horizontal_layout = [h_tail, h_middle, random_coord]
+      layout_options = [horizontal_layout, vertical_layout]
+      comp_destroyer_pos = layout_options.sample
+    elsif random_coord == :C1 || random_coord == :C2 || random_coord == :D1 || random_coord == :D2
+      h_middle = coordinates_array[coordinates_array.index(random_coord) + 1]
+      h_tail = coordinates_array[coordinates_array.index(random_coord) + 2]
+      v_middle = coordinates_array[coordinates_array.index(random_coord) - 4]
+      v_tail = coordinates_array[coordinates_array.index(random_coord) - 8]
+      vertical_layout = [v_tail, v_middle, random_coord]
+      horizontal_layout = [random_coord, h_middle, h_tail]
       layout_options = [horizontal_layout, vertical_layout]
       comp_destroyer_pos = layout_options.sample
     end
     @hash_chart[comp_destroyer_pos[0]] = "S"
     @hash_chart[comp_destroyer_pos[1]] = "S"
     @hash_chart[comp_destroyer_pos[2]] = "S"
-    puts "The computer has placed its destroyer." #at #{comp_destroyer_pos}."
-    binding.pry
     sleep(2.5)
-    puts "Placing computer canoe..."
   end
 
+  def computer_place_canoe
 # and the canoe cannot be placed on an S.
 
   # end
   #
   # def computer_place_canoe
+  # puts "Placing mycanoe..."
   # end
   #
   def player_place_canoe
@@ -123,9 +113,11 @@ class Game_Boards
     sleep(3)
     puts "Enter the squares for the two-unit ship:"
     print "> "
-    destroyer_entry = $stdin.gets.chomp
+    player_canoe_entry = $stdin.gets.chomp
   end
-  #
+
+  # def player_canoe_rules
+  #   if
   # def player_place_canoe
   # end
 
