@@ -59,19 +59,19 @@ class Game_Boards
       v_middle = coordinates_array[coordinates_array.index(head) + 4]
       v_tail = coordinates_array[coordinates_array.index(head) + 8]
       vertical_layout = [head, v_middle, v_tail]
-      layout_options = [horizontal_layout, vertical_layout]
+      layout_options = [[horizontal_layout], [vertical_layout]]
       comp_destroyer_pos = layout_options.sample
     end
-    if random_coord == :C3 || random_coord == :C4 || random_coord == :D3 || random_coord == :D4
-      h_middle = coordinates_array[coordinates_array.index(head) - 1]
+    if random_coord == :C3 || random_coord == :C4 || random_coord == :D3 || random_coord == :D4 #bugged
+      #say we get #:C3 here
+      h_middle = coordinates_array[coordinates_array.index(head) - 1] #
       h_tail = coordinates_array[coordinates_array.index(head) - 2]
       horizontal_layout = [h_tail, h_middle, head]
       v_middle = coordinates_array[coordinates_array.index(head) - 4]
       v_tail = coordinates_array[coordinates_array.index(head) - 8]
       vertical_layout = [v_tail, v_middle, head]
-      layout_options = [horizontal_layout, vertical_layout]
+      layout_options = [[horizontal_layout], [vertical_layout]] #the problem is on this line. layout_options.sample will pick random elements from the array. how can you make them separate?
       comp_destroyer_pos = layout_options.sample
-
     end
     if random_coord == :A3 || random_coord == :A4 || random_coord == :B3 || random_coord == :B4
       v_middle = coordinates_array[coordinates_array.index(head) + 4]
@@ -80,6 +80,7 @@ class Game_Boards
       h_middle = coordinates_array[coordinates_array.index(head) - 1]
       h_tail = coordinates_array[coordinates_array.index(head) - 2]
       horizontal_layout = [h_tail, h_middle, head]
+      layout_options = [[horizontal_layout], [vertical_layout]]
       comp_destroyer_pos = layout_options.sample
     end
     if random_coord == :C1 || random_coord == :C2 || random_coord == :D1 || random_coord == :D2
@@ -89,6 +90,7 @@ class Game_Boards
       v_middle = coordinates_array[coordinates_array.index(head) - 4]
       v_tail = coordinates_array[coordinates_array.index(head) - 8]
       vertical_layout = [h_tail, v_middle, head]
+      layout_options = [[horizontal_layout], [vertical_layout]]
       comp_destroyer_pos = layout_options.sample
     end
     @hash_chart[comp_destroyer_pos[0]] = "S"
