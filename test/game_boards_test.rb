@@ -9,7 +9,7 @@ test_intro_board_prints
 
 
 
-def test_computer_destroyer_
+def test_
 
 
 assert_equal
