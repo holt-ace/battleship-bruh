@@ -1,3 +1,5 @@
+require './lib/game_boards'
+
 class Ships
 
   attr_reader :length, :ship_location
