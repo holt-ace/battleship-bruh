@@ -10,11 +10,11 @@ class GameBoardsTest < Minitest::Test
 
 
 
-  def test_computer_can_place_destroyer_correctly
-
-
-    assert_equal comp_destroyer_pos[2], 
-  end
+  # def test_computer_can_place_destroyer_correctly
+  #
+  #
+  #   assert_equal comp_destroyer_pos[2],
+  # end
 
   # def test_computer_destroyer_doesnt_wrap
   #
