@@ -1,6 +1,5 @@
-require 'pry'
-
-class Game_Boards
+class GameBoards
+  attr_accessor :hash_chart
   def initialize
     @hash_chart = {
      A1: "x",
@@ -18,7 +17,8 @@ class Game_Boards
      D1: "x",
      D2: "x",
      D3: "x",
-     D4: "x"}
+     D4: "x",
+     }
      @row_1 = "=" * 11
      @row_2 = [".", "1", "2", "3", "4"]
      @row_3 = ["A", [@hash_chart[:A1]], [@hash_chart[:A2]], [@hash_chart[:A3]], [@hash_chart[:A4]]]
@@ -92,10 +92,7 @@ class Game_Boards
     @hash_chart[comp_destroyer_pos[1]] = "S"
     @hash_chart[comp_destroyer_pos[2]] = "S"
     puts "I have placed my destroyer at #{comp_destroyer_pos}."
-
   end
-
-# and the canoe cannot be placed on an S.
   def computer_place_canoe
     coordinates_array = @hash_chart.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
     random_coord = coordinates_array.sample
@@ -148,12 +145,48 @@ end
   def player_place_canoe
     puts "I have laid out my ships on the grid."
     puts "You now need to layout your two ships."
-    puts "The first is two units long and the"
-    puts "second is three units long."
-    puts "The grid has A1 at the top left and D4 at the bottom right."
+    puts "The first is two units long and the \nsecond is three units long."
+    puts "The grid has A1 at the top left and \nD4 at the bottom right."
     sleep(3)
-    puts "Enter the squares for the two-unit ship:"
+    puts "Enter the coordinates for the two-unit ship:"
     print "> "
     player_canoe_entry = $stdin.gets.chomp
+    # break entry into seperate strings array of key coordinates
+    canoe_coordinates_array = player_canoe_entry.split
+    #iterate through the array and change each element to a symbol
+    symbol_array = canoe_coordinates_array.map do |coordinate_key|
+      # `a.map{|x|x.to_sym}`
+      coordinate_key.to_sym
+    end
+    # refactor split and map methods^^^^
+    # canoe_coordinates_array = player_canoe_entry.split(" ").map { |coordinate_key| coordinate_key.to_sym }
+    # now need to create
+
+    #return hash_chart changes
+    return @hash_chart[symbol_array[0]] = "S", @hash_chart[symbol_array[1]] = "S"
+    #this should work ^^^ I tested multiple times
+    #almost went down a rabbit hole of no return but found a shortcut!
+  end
+  
+  #this method does the same as player_place_canoe
+  def player_place_destroyer
+    puts "Prepare for battle! Place your DESTROYER."
+    print "> "
+    player_destroyer_entry = $stdin.gets.chomp
+    # break entry into seperate strings array of key coordinates
+    destroyer_coordinates_array = player_destroyer_entry.split
+    #iterate through the array and change each element to a symbol
+    symbol_array = destroyer_coordinates_array.map do |coordinate_key|
+      # `a.map{|x|x.to_sym}`
+      coordinate_key.to_sym
+    end
+    # refactor split and map methods^^^^
+    # destroyer_coordinates_array = player_destroyer_entry.split(" ").map { |coordinate_key| coordinate_key.to_sym }
+    # now need to create
+
+    #return hash_chart changes
+    return @hash_chart[symbol_array[0]] = "S", @hash_chart[symbol_array[1]] = "S"
+    #this should work ^^^ I tested multiple times
+    #almost went down a rabbit hole of no return but found a shortcut!
   end
 end
