@@ -6,9 +6,9 @@ require './lib/game_boards'
 computer_destroyer = Game_Boards.new
 # sleep(2)
 computer_destroyer.computer_place_destroyer
-# computer_canoe = Game_Boards.new
+computer_canoe = Game_Boards.new
 # sleep(3)
-# # computer_canoe.computer_place_canoe
+computer_canoe.computer_place_canoe
 # # sleep(3)
 # player_canoe = Game_Boards.new
 # player_destroyer = Game_Boards.new

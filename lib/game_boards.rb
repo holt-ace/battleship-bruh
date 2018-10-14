@@ -1,5 +1,3 @@
-
-
 class GameBoards
   attr_accessor :hash_chart
   def initialize
@@ -20,7 +18,7 @@ class GameBoards
      D2: "x",
      D3: "x",
      D4: "x",
-   }
+     }
      @row_1 = "=" * 11
      @row_2 = [".", "1", "2", "3", "4"]
      @row_3 = ["A", [@hash_chart[:A1]], [@hash_chart[:A2]], [@hash_chart[:A3]], [@hash_chart[:A4]]]
@@ -53,7 +51,6 @@ class GameBoards
   def computer_place_destroyer
     coordinates_array = @hash_chart.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
     random_coord = coordinates_array.sample
-    # random_coord = :C3
     if random_coord == :A1 || random_coord == :A2 || random_coord == :B1 || random_coord == :B2
       h_middle = coordinates_array[coordinates_array.index(random_coord) + 1]
       h_tail = coordinates_array[coordinates_array.index(random_coord) + 2]
@@ -94,22 +91,57 @@ class GameBoards
     @hash_chart[comp_destroyer_pos[0]] = "S"
     @hash_chart[comp_destroyer_pos[1]] = "S"
     @hash_chart[comp_destroyer_pos[2]] = "S"
-    sleep(2.5)
+    puts "I have placed my destroyer at #{comp_destroyer_pos}."
   end
-
   def computer_place_canoe
-# and the canoe cannot be placed on an S.
-  end
+    coordinates_array = @hash_chart.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
+    random_coord = coordinates_array.sample
+    h_tail = coordinates_array[coordinates_array.index(random_coord) + 1]
+    v_tail = coordinates_array[coordinates_array.index(random_coord) + 4]
+    reverse_tail = coordinates_array[coordinates_array.index(random_coord) - 1]
+    upside_down_tail = coordinates_array[coordinates_array.index(random_coord) - 4]
+    vertical_layout = [random_coord, v_tail]
+    horizontal_layout = [random_coord, h_tail]
+    reverse_layout = [random_coord, reverse_tail]
+    upside_down_layout = [random_coord, upside_down_tail]
+    if @hash_chart[random_coord] != "S"
+      if random_coord == :A1
+        layout_options = [horizontal_layout, vertical_layout]
+        comp_canoe_pos = layout_options.sample
+      elsif random_coord == :A2 || random_coord == :A3
+        layout_options = [horizontal_layout, reverse_layout, vertical_layout]
+        comp_canoe_pos = layout_options.sample
+      elsif random_coord == :A4
+        layout_options = [reverse_layout, vertical_layout]
+        comp_canoe_pos = layout_options.sample
+      elsif random_coord == :B1 || random_coord == :C1
+        layout_options = [upside_down_layout, horizontal_layout, vertical_layout]
+        comp_canoe_pos = layout_options.sample
+      elsif random_coord == :B2 || random_coord == :B3 || random_coord == :C2 || random_coord == :C3
+        layout_options = [upside_down_layout, horizontal_layout, vertical_layout, reverse_layout]
+        comp_canoe_pos = layout_options.sample
+      elsif random_coord == :B4 || random_coord == :C4
+        layout_options = [reverse_layout, upside_down_layout, vertical_layout]
+        comp_canoe_pos = layout_options.sample
+      elsif random_coord == :D1
+        layout_options = [upside_down_layout, horizontal_layout]
+        comp_canoe_pos = layout_options.sample
+      elsif random_coord == :D2 || random_coord == :D3
+        layout_options = [reverse_layout, upside_down_layout, horizontal_layout]
+        comp_canoe_pos = layout_options.sample
+      elsif random_coord == :D4
+        layout_options = [reverse_layout, upside_down_layout]
+        comp_canoe_pos = layout_options.sample
+      end
+    end
+    if @hash_chart[random_coord] == "S"
+      computer_place_canoe
+    end
+    @hash_chart[comp_canoe_pos[0]] = "S"
+    @hash_chart[comp_canoe_pos[1]] = "S"
+    puts "I have placed my canoe at #{comp_canoe_pos}. What are you going to do about it little bitch?"
+end
 
-  # end
-  #
-  # def computer_place_canoe
-  # puts "Placing mycanoe..."
-  # end
-  #
-
-  #this method takes a players input and uses it to change the hash key:value
-  #pairs that are affected
   def player_place_canoe
     puts "I have laid out my ships on the grid."
     puts "You now need to layout your two ships."
@@ -135,7 +167,7 @@ class GameBoards
     #this should work ^^^ I tested multiple times
     #almost went down a rabbit hole of no return but found a shortcut!
   end
-
+  
   #this method does the same as player_place_canoe
   def player_place_destroyer
     puts "Prepare for battle! Place your DESTROYER."
@@ -157,6 +189,4 @@ class GameBoards
     #this should work ^^^ I tested multiple times
     #almost went down a rabbit hole of no return but found a shortcut!
   end
-
-
 end
