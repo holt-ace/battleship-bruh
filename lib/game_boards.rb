@@ -1,3 +1,5 @@
+require 'pry'
+
 class GameBoards
   attr_accessor :hash_chart
   def initialize
