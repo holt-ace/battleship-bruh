@@ -1,9 +1,19 @@
 require './lib/game_boards'
 require 'pry'
+
 class Ships
+  attr_accessor :board_1, :computer_board, :computer_destroyer, :computer_canoe
+  def initialize
+    @board_1 = GameBoards.new
+    @board_2 = GameBoards.new
+    @computer_board = @board_1.hash_chart
+    @player_board = @board_2.hash_chart
+    @computer_destroyer = []
+    @computer_canoe = []
+  end
 
   def computer_place_destroyer
-    coordinates_array = @hash_chart.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
+    coordinates_array = @computer_board.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
     random_coord = coordinates_array.sample
     if random_coord == :A1 || random_coord == :A2 || random_coord == :B1 || random_coord == :B2
       h_middle = coordinates_array[coordinates_array.index(random_coord) + 1]
@@ -42,14 +52,15 @@ class Ships
       layout_options = [horizontal_layout, vertical_layout]
       comp_destroyer_pos = layout_options.sample
     end
-    @hash_chart[comp_destroyer_pos[0]] = "S"
-    @hash_chart[comp_destroyer_pos[1]] = "S"
-    @hash_chart[comp_destroyer_pos[2]] = "S"
-    puts "I have placed my destroyer."
+    @computer_board[comp_destroyer_pos[0]] = "S"
+    @computer_board[comp_destroyer_pos[1]] = "S"
+    @computer_board[comp_destroyer_pos[2]] = "S"
+    @computer_destroyer << comp_destroyer_pos
+    puts "I have placed my destroyer, which is #{@computer_destroyer.flatten.length} units long."
   end
 
   def computer_place_canoe
-    coordinates_array = @hash_chart.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
+    coordinates_array = @computer_board.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
     random_coord = coordinates_array.sample
     h_tail = coordinates_array[coordinates_array.index(random_coord) + 1]
     v_tail = coordinates_array[coordinates_array.index(random_coord) + 4]
@@ -59,7 +70,9 @@ class Ships
     horizontal_layout = [random_coord, h_tail]
     reverse_layout = [random_coord, reverse_tail]
     upside_down_layout = [random_coord, upside_down_tail]
-    if @hash_chart[random_coord] != "S"
+    if @computer_board[random_coord] == "S"
+      computer_place_canoe
+    elsif @computer_board[random_coord] != "S"
       if random_coord == :A1
         layout_options = [horizontal_layout, vertical_layout]
         comp_canoe_pos = layout_options.sample
@@ -87,15 +100,15 @@ class Ships
       elsif random_coord == :D4
         layout_options = [reverse_layout, upside_down_layout]
         comp_canoe_pos = layout_options.sample
-      end
+        @computer_board[comp_canoe_pos[0]] = "S"
+        @computer_board[comp_canoe_pos[1]] = "S"
+      end #DEMON BUGGGG
     end
-    if @hash_chart[random_coord] == "S"
-      computer_place_canoe
-    end
-    @hash_chart[comp_canoe_pos[0]] = "S"
-    @hash_chart[comp_canoe_pos[1]] = "S"
-    puts "I have placed my canoe."
+    @computer_canoe << comp_canoe_pos
+    puts "I have placed my canoe, which is #{@computer_canoe.flatten.length} units long."
+  end
 
+###################################################################################
   def player_place_canoe
     puts "I have laid out my ships on the grid."
     puts "You now need to layout your two ships."
@@ -118,8 +131,8 @@ class Ships
     # now need to create
 
     #return hash_chart changes
-    return @hash_chart[symbol_array[0]] = "S", @hash_chart[symbol_array[1]] = "S"
-    #this works we just need to give it access to @hash_chart
+    return @player_board[symbol_array[0]] = "S", @player_board[symbol_array[1]] = "S"
+    #this works we just need to give it access to @player_board
     #almost went down a rabbit hole of no return but found a shortcut!
   end
 
@@ -134,7 +147,7 @@ class Ships
       coordinate_key.to_sym
     end
 
-    return @hash_chart[symbol_array[0]] = "S", @hash_chart[symbol_array[1]] = "S", @hash_chart[symbol_array[2]] = "S"
+    return @player_board[symbol_array[0]] = "S", @player_board[symbol_array[1]] = "S", @player_board[symbol_array[2]] = "S"
   end
 
 end
