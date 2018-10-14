@@ -12,9 +12,9 @@ class Ships
     puts "Prepare for battle! Place your DESTROYER."
     print "> "
     destroyer_coordinates_entry = $stdin.gets.chomp
-    # break string into seperate symbol array
+    # break entry into seperate strings array of key coordinates
     destroyer_coordinates_array = destroyer_coordinates_entry.split
-    #iterate throuugh the array and change each element to a symbol
+    #iterate through the array and change each element to a symbol
     symbol_array = destroyer_coordinates_array.map do |key|
       # `a.map{|x|x.to_sym}`
       key.to_sym

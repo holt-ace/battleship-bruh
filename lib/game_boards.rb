@@ -1,4 +1,4 @@
-require 'pry'
+
 
 class Game_Boards
   def initialize
@@ -18,7 +18,8 @@ class Game_Boards
      D1: "x",
      D2: "x",
      D3: "x",
-     D4: "x"}
+     D4: "x",
+   }
      @row_1 = "=" * 11
      @row_2 = [".", "1", "2", "3", "4"]
      @row_3 = ["A", [@hash_chart[:A1]], [@hash_chart[:A2]], [@hash_chart[:A3]], [@hash_chart[:A4]]]
@@ -97,6 +98,7 @@ class Game_Boards
 
   def computer_place_canoe
 # and the canoe cannot be placed on an S.
+  end
 
   # end
   #
@@ -107,19 +109,53 @@ class Game_Boards
   def player_place_canoe
     puts "I have laid out my ships on the grid."
     puts "You now need to layout your two ships."
-    puts "The first is two units long and the"
-    puts "second is three units long."
-    puts "The grid has A1 at the top left and D4 at the bottom right."
+    puts "The first is two units long and the \nsecond is three units long."
+    puts "The grid has A1 at the top left and \nD4 at the bottom right."
     sleep(3)
-    puts "Enter the squares for the two-unit ship:"
+    puts "Enter the coordinates for the two-unit ship:"
     print "> "
     player_canoe_entry = $stdin.gets.chomp
+    # break entry into seperate strings array of key coordinates
+    canoe_coordinates_array = player_canoe_entry.split
+    #iterate through the array and change each element to a symbol
+    symbol_array = canoe_coordinates_array.map do |coordinate_key|
+      # `a.map{|x|x.to_sym}`
+      coordinate_key.to_sym
+    end
+    #return hash_chart changes
+    #merge!
+    #if this ^^^ doesnt work for returning hashchart changes then may have
+    #to seperate symbol_array into symbols and change them individually
+    symbol_array
   end
 
   # def player_canoe_rules
   #   if
   # def player_place_canoe
   # end
+end
 
 
+
+
+
+
+player_canoe_entry = $stdin.gets.chomp
+# break entry into strings array of key coordinates
+canoe_coordinates_array = player_canoe_entry.split
+#iterate through the array and change each element to a symbol
+symbol_array = canoe_coordinates_array.map do |coordinate_key|
+  # `a.map{|x|x.to_sym}`
+  coordinate_key.to_sym
+end
+  symbol_array.map do |symbol|
+
+  end
+symbol_array.insert(1, "S")
+symbol_array.insert(3, "S")
+#change symbol array into a hash (array.to.hash makes even index keys and odd index values)
+#then merge! with original hash which will update the key:value pairs of @hash_chart
+#if this ^^^ doesnt work for returning hashchart changes then may have
+#to seperate symbol_array into symbols and change them individually
+#return hash_chart changes
 end
