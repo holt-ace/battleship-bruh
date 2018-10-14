@@ -1,6 +1,6 @@
 
 
-class Game_Boards
+class GameBoards
   attr_accessor :hash_chart
   def initialize
     @hash_chart = {

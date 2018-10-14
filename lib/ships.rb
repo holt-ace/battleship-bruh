@@ -1,6 +1,7 @@
 require './lib/game_boards'
-
+require 'pry'
 class Ships
+
 
   def computer_place_destroyer
     coordinates_array = @hash_chart.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
@@ -66,7 +67,8 @@ class Ships
     puts "The first is two units long and the \nsecond is three units long."
     puts "The grid has A1 at the top left and \nD4 at the bottom right."
     sleep(3)
-    puts "Enter the coordinates for the two-unit ship:"
+    puts "Example Entry: 'A1 A2'"
+    puts "Enter the coordinates for the two-unit ship seperated by a space."
     print "> "
     player_canoe_entry = $stdin.gets.chomp
     # break entry into seperate strings array of key coordinates
@@ -82,36 +84,23 @@ class Ships
 
     #return hash_chart changes
     return @hash_chart[symbol_array[0]] = "S", @hash_chart[symbol_array[1]] = "S"
-    #this should work ^^^ I tested multiple times
+    #this works we just need to give it access to @hash_chart
     #almost went down a rabbit hole of no return but found a shortcut!
   end
 
   #this method does the same as player_place_canoe
   def player_place_destroyer
-    puts "Now enter the coordinates for the 3 unit ship."
+    puts "Now enter the coordinates for the 3 unit ship seperated by spaces."
+    puts "Example Entry: 'C2 C3 C4'"
     print "> "
     player_destroyer_entry = $stdin.gets.chomp
-    # break entry into seperate strings array of key coordinates
     destroyer_coordinates_array = player_destroyer_entry.split(" ")
-    #iterate through the array and change each element to a symbol
     symbol_array = destroyer_coordinates_array.map do |coordinate_key|
-      # `a.map{|x|x.to_sym}`
       coordinate_key.to_sym
     end
-    # refactor split and map methods^^^^
-    # destroyer_coordinates_array = player_destroyer_entry.split(" ").map { |coordinate_key| coordinate_key.to_sym }
-    # now need to create
 
-    #return hash_chart changes
-    return @hash_chart[symbol_array[0]] = "S", @hash_chart[symbol_array[1]] = "S"
-    #this should work ^^^ I tested multiple times
-    #almost went down a rabbit hole of no return but found a shortcut!
+    return @hash_chart[symbol_array[0]] = "S", @hash_chart[symbol_array[1]] = "S", @hash_chart[symbol_array[2]] = "S"
+
   end
 
-
 end
-
-player_ships = Ships.new
-
-player_ships.player_place_destroyer
-player_ships.player_place_canoe
