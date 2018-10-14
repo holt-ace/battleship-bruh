@@ -1,6 +1,7 @@
 
 
 class Game_Boards
+  attr_accessor :hash_chart
   def initialize
     @hash_chart = {
      A1: "x",
@@ -106,6 +107,9 @@ class Game_Boards
   # puts "Placing mycanoe..."
   # end
   #
+
+  #this method takes a players input and uses it to change the hash key:value
+  #pairs that are affected
   def player_place_canoe
     puts "I have laid out my ships on the grid."
     puts "You now need to layout your two ships."
@@ -122,40 +126,37 @@ class Game_Boards
       # `a.map{|x|x.to_sym}`
       coordinate_key.to_sym
     end
+    # refactor split and map methods^^^^
+    # canoe_coordinates_array = player_canoe_entry.split(" ").map { |coordinate_key| coordinate_key.to_sym }
+    # now need to create
+
     #return hash_chart changes
-    #merge!
-    #if this ^^^ doesnt work for returning hashchart changes then may have
-    #to seperate symbol_array into symbols and change them individually
-    symbol_array
+    return @hash_chart[symbol_array[0]] = "S", @hash_chart[symbol_array[1]] = "S"
+    #this should work ^^^ I tested multiple times
+    #almost went down a rabbit hole of no return but found a shortcut!
   end
 
-  # def player_canoe_rules
-  #   if
-  # def player_place_canoe
-  # end
-end
+  #this method does the same as player_place_canoe
+  def player_place_destroyer
+    puts "Prepare for battle! Place your DESTROYER."
+    print "> "
+    player_destroyer_entry = $stdin.gets.chomp
+    # break entry into seperate strings array of key coordinates
+    destroyer_coordinates_array = player_destroyer_entry.split
+    #iterate through the array and change each element to a symbol
+    symbol_array = destroyer_coordinates_array.map do |coordinate_key|
+      # `a.map{|x|x.to_sym}`
+      coordinate_key.to_sym
+    end
+    # refactor split and map methods^^^^
+    # destroyer_coordinates_array = player_destroyer_entry.split(" ").map { |coordinate_key| coordinate_key.to_sym }
+    # now need to create
 
-
-
-
-
-
-player_canoe_entry = $stdin.gets.chomp
-# break entry into strings array of key coordinates
-canoe_coordinates_array = player_canoe_entry.split
-#iterate through the array and change each element to a symbol
-symbol_array = canoe_coordinates_array.map do |coordinate_key|
-  # `a.map{|x|x.to_sym}`
-  coordinate_key.to_sym
-end
-  symbol_array.map do |symbol|
-
+    #return hash_chart changes
+    return @hash_chart[symbol_array[0]] = "S", @hash_chart[symbol_array[1]] = "S"
+    #this should work ^^^ I tested multiple times
+    #almost went down a rabbit hole of no return but found a shortcut!
   end
-symbol_array.insert(1, "S")
-symbol_array.insert(3, "S")
-#change symbol array into a hash (array.to.hash makes even index keys and odd index values)
-#then merge! with original hash which will update the key:value pairs of @hash_chart
-#if this ^^^ doesnt work for returning hashchart changes then may have
-#to seperate symbol_array into symbols and change them individually
-#return hash_chart changes
+
+
 end
