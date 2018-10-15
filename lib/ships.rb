@@ -32,7 +32,7 @@ class Ships
     @computer_board[comp_canoe_pos[1]] = "S"
     puts "I have placed my canoe, which is #{@computer_canoe.length} units long."
     sleep(3)
-    puts "========================================"
+    puts "=" * 40
   end
 
   def options_maker_horizontal(letter, sign_of_one, number, ship_length) #fully functional
@@ -91,13 +91,12 @@ class Ships
         # binding.pry
       end
     if @player_board.keys.include?(symbol_array[0]) == true && @player_board.keys.include?(symbol_array[1]) == true && symbol_array.length == 2
-      # validated_ship_positions(player_canoe_entry, 2)
+      validated_ship_positions(player_canoe_entry, 2)
       @computer_canoe << comp_canoe_pos
       puts "I have placed my canoe, which is #{@computer_canoe.flatten.length} units long."
       sleep(3)
-      return @player_board[symbol_array[0]] = "S", @player_board[symbol_array[1]] = "S"
-      sleep(0.5)
       puts "Your CANOE has been placed. Too bad I can't see it!"
+      return @player_board[symbol_array[0]] = "S", @player_board[symbol_array[1]] = "S"
     else
       puts "INVALID INPUT. PLEASE TRY AGAIN!"
       sleep(2)
@@ -117,8 +116,8 @@ class Ships
     #if they enter anything that doesnt match the exact format, recurse
     if @player_board.keys.include?(symbol_array[0]) == true && @player_board.keys.include?(symbol_array[1]) == true && @player_board.keys.include?(symbol_array[2]) && symbol_array.length == 3
       # validated_ship_positions(player_destroyer_entry, 3)
-      return @player_board[symbol_array[0]] = "S", @player_board[symbol_array[1]] = "S", @player_board[symbol_array[2]] = "S"
       puts "Your DESTROYER has been placed. Too bad I can't see it!"
+      return @player_board[symbol_array[0]] = "S", @player_board[symbol_array[1]] = "S", @player_board[symbol_array[2]] = "S"
     else
       puts "INVALID INPUT. PLEASE ENTER COORDINATES AS SUCH: C2 C3 C4"
       sleep(2)
