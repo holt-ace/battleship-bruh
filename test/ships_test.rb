@@ -55,7 +55,7 @@ class ShipsTest < Minitest::Test
     computer_canoe.computer_place_canoe
     coordinates_array = computer_ships.computer_board.keys
     random-coord = coordinates_array.sample
-    
+
   end
 
   def test_does_options_horizontal_method_return_all_horizontal_orientations
@@ -77,8 +77,8 @@ class ShipsTest < Minitest::Test
 
   def test_where_can_ship_go_stores_orientations
     computer_ships = Ships.new
-    assert_equal ["A1", "A2", "A1", "A0", "A1", "B1", "A1", "Z1"], computer_ships.where_can_ship_go("A1", 2)
-    assert_equal ["A1", "A2", "A3", "A1", "A0", "A-1", "A1", "B1", "C1", "A1", "Z1", "Y1"], computer_ships.where_can_ship_go("A1", 3)
+    assert_equal ["A1", "A2", "A1", "A0", "A1", "B1", "A1", "Z1"], computer_ships.validated_ship_positions("A1", 2)
+    assert_equal ["A1", "A2", "A3", "A1", "A0", "A-1", "A1", "B1", "C1", "A1", "Z1", "Y1"], computer_ships.validated_ship_positions("A1", 3)
   end
 
 
