@@ -11,11 +11,11 @@ class Ships
     @computer_destroyer = []
     @computer_canoe = []
   end
-
+#25-57: end syntax error
   def computer_place_destroyer
     coordinates_array = @computer_board.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
     random_coord = coordinates_array.sample
-    where_can_ship_go(random_coord, 3)
+    # where_can_ship_go(random_coord, 3)
     @computer_board[comp_destroyer_pos[0]] = "S"
     @computer_board[comp_destroyer_pos[1]] = "S"
     @computer_board[comp_destroyer_pos[2]] = "S"
@@ -23,7 +23,7 @@ class Ships
     puts "I have placed my destroyer, which is #{@computer_destroyer.flatten.length} units long."
   end
 
-  def options_maker_horizontal(letter, sign_of_one, number, ship_length)
+  def options_maker_horizontal(letter, sign_of_one, number, ship_length) #fully functional
     options = []
     ship_length.times do |index|
       updated_num = number.to_i + (sign_of_one * index)
@@ -32,46 +32,51 @@ class Ships
     options
   end
 
-  def options_maker_vertical(letter, sign_of_one, number, ship_length)
+  def options_maker_vertical(letter, sign_of_one, number, ship_length) #broken
     options = []
+    alphabet = [*'A'..'Z']
     ship_length.times do |index|
-      updated_letter = letter + (sign_of_one * index)
+      updated_letter = alphabet[alphabet.find_index(letter) + (sign_of_one * index)]
       options << updated_letter + number.to_s
     end
     options
   end
 
-  #method will take one split coordinate and returning all possible horizontal orientations for any ship length
   def where_can_ship_go(coordinate, ship_length)
     right = options_maker_horizontal(coordinate[0], 1, coordinate[1], ship_length)
     left = options_maker_horizontal(coordinate[0], -1, coordinate[1], ship_length)
-    down = #options_maker_vertical
-    up = #options_maker_vertical
-    # orientations = [right, left, down, up].map do |element|
-    # verify all positions are on the board
+    down = options_maker_vertical(coordinate[0], 1, coordinate[1], ship_length)
+    up = options_maker_vertical(coordinate[0], -1, coordinate[1], ship_length)
+    orientations = [right, left, down, up]
+    reliable_orientations = orientations.map do |element|
+      if @computer_board.keys.include? (orientations) == false
+        reliable_orientations << element
+      end
+      reliable_orientations
+    end
+    orientations.flatten
+  end
 
 
-    #hash_chart.keys.include? == true
+
 
   #last step is verifying that options_maker values are actually on the board
-  #coordinates_array.include?(coordinates[0]) == true
 
   def computer_place_canoe
     coordinates_array = @computer_board.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
     random_coord = coordinates_array.sample
-    where_can_ship_go(random_coord, 2)
+    comp_canoe_pos = where_can_ship_go(random_coord, 2).sample
     if @computer_board[random_coord] == "S"
       computer_place_canoe
       return
     elsif @computer_board[random_coord] != "S"
-
+      @computer_canoe << comp_canoe_pos
+    end
       @computer_board[comp_canoe_pos[0]] = "S"
       @computer_board[comp_canoe_pos[1]] = "S"
-      @computer_canoe << comp_canoe_pos
-    puts "I have placed my canoe, which is #{@computer_canoe.flatten.length} units long."
+    puts "I have placed my canoe, which is #{@computer_canoe.length} units long."
     sleep(3)
     puts "========================================"
-    end
   end
 
 ###################################################################################
@@ -90,7 +95,7 @@ class Ships
         # binding.pry
       end
     if @player_board.keys.include?(symbol_array[0]) == true && @player_board.keys.include?(symbol_array[1]) == true && symbol_array.length == 2
-      where_can_ship_go(player_canoe_entry, 2)
+      # where_can_ship_go(player_canoe_entry, 2)
       @computer_canoe << comp_canoe_pos
       puts "I have placed my canoe, which is #{@computer_canoe.flatten.length} units long."
       sleep(3)
@@ -115,7 +120,7 @@ class Ships
     end
     #if they enter anything that doesnt match the exact format, recurse
     if @player_board.keys.include?(symbol_array[0]) == true && @player_board.keys.include?(symbol_array[1]) == true && @player_board.keys.include?(symbol_array[2]) && symbol_array.length == 3
-      where_can_ship_go(player_destroyer_entry, 3)
+      # where_can_ship_go(player_destroyer_entry, 3)
       return @player_board[symbol_array[0]] = "S", @player_board[symbol_array[1]] = "S", @player_board[symbol_array[2]] = "S"
       puts "Your DESTROYER has been placed. Too bad I can't see it!"
     else
