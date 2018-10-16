@@ -85,11 +85,14 @@ class Ships
     puts "Example Entry: 'A1 A2'"
     print "> "
     player_canoe_entry = $stdin.gets.chomp #A1 D18
-      canoe_coordinates_array = player_canoe_entry.split
-      symbol_array = canoe_coordinates_array.map do |coordinate_key|
-        coordinate_key.to_sym #
-        # binding.pry
-      end
+    symbol_array = player_canoe_entry.split(" ").map { |coordinate_key| coordinate_key.to_sym }
+      #this method ^^^ replces this:
+
+      # canoe_coordinates_array = player_canoe_entry.split
+      # symbol_array = canoe_coordinates_array.map do |coordinate_key|
+      #   coordinate_key.to_sym #
+      #   # binding.pry
+      # end
     if @player_board.keys.include?(symbol_array[0]) == true && @player_board.keys.include?(symbol_array[1]) == true && symbol_array.length == 2
       validated_ship_positions(player_canoe_entry, 2)
       @computer_canoe << comp_canoe_pos
@@ -109,10 +112,13 @@ class Ships
     puts "Example Entry: 'C2 C3 C4'"
     print "> "
     player_destroyer_entry = $stdin.gets.chomp
-    destroyer_coordinates_array = player_destroyer_entry.split(" ")
-    symbol_array = destroyer_coordinates_array.map do |coordinate_key|
-      coordinate_key.to_sym
-    end
+    symbol_array = player_destroyer_entry.split(" ").map { |coordinate_key| coordinate_key.to_sym }
+    #this method ^^^ replces this:
+
+    # destroyer_coordinates_array = player_destroyer_entry.split(" ")
+    # symbol_array = destroyer_coordinates_array.map do |coordinate_key|
+    #   coordinate_key.to_sym
+    # end
     #if they enter anything that doesnt match the exact format, recurse
     if @player_board.keys.include?(symbol_array[0]) == true && @player_board.keys.include?(symbol_array[1]) == true && @player_board.keys.include?(symbol_array[2]) && symbol_array.length == 3
       # validated_ship_positions(player_destroyer_entry, 3)
