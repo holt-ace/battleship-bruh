@@ -127,7 +127,7 @@ class Ships
       #   # binding.pry
       # end
       puts "Unfortunately, your ship sunk instantly. Place your destroyer. This is your last chance."
-      sleep(10)
+      sleep(4)
     # if @player_board.keys.include?(symbol_array[0]) == true && @player_board.keys.include?(symbol_array[1]) == true && symbol_array.length == 2
     #   validated_ship_positions(player_canoe_entry, 2)
     #   @computer_canoe << comp_canoe_pos

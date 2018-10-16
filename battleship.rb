@@ -15,4 +15,5 @@ player_ships.player_place_canoe
 sleep(2)
 player_ships.player_place_destroyer
 puts "Mission Failure. Come back next time for more battleship!"
+sleep(3)
 game_1.unintentional_introduction

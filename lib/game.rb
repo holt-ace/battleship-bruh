@@ -73,25 +73,6 @@ and by calling out basic coordinates, find your opponent’s fleet before they f
     sleep(3)
   end
 
-  def low_quality_bait
-    puts
-    puts "Failed to exit."
-    puts "ERROR: **Computer SHUTDOWN IMMINENT**"
-    puts "60 seconds remaining. Enter bitcoin wallet API key now:"
-    stupid_input
-  end
-
-  def stupid_input
-    $stdin.gets.chomp
-    print "> "
-    puts "Shutdown halted. Say goodbye to your bitcoin!"
-    sleep(3)
-    puts "KIDDING. Game Terminated."
-    olive_branch
-    sleep(10)
-    exit
-  end
-
   def olive_branch
     puts %Q{
                 .@&%%#//&*...
