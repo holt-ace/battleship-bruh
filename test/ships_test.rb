@@ -7,7 +7,6 @@ class ShipsTest < Minitest::Test
 
 
   def test_if_ships_exist
-    skip
     destroyer = Ships.new
     canoe = Ships.new
     assert_instance_of Ships, destroyer
@@ -15,15 +14,12 @@ class ShipsTest < Minitest::Test
   end
 
   def test_computer_ships_dont_stack
-    skip
-    computer_canoe = Ships.new
-    computer_canoe.computer_place_canoe
-    coordinates_array = computer_ships.computer_board.keys
-    random-coord = coordinates_array.sample
-
+    destroyer = Ships.new
+    canoe = Ships.new
+    
   end
 
-  def test_does_options_horizontal_method_return_all_horizontal_orientations
+  def test_does_options_maker_horizontal_return_all_horizontal_orientations
     computer_ships = Ships.new
     assert_equal ["A1", "A2"], computer_ships.options_maker_horizontal("A", 1, "1", 2)
     assert_equal ["A1", "A0"], computer_ships.options_maker_horizontal("A", -1, "1", 2)
@@ -32,7 +28,7 @@ class ShipsTest < Minitest::Test
 
   end
 
-  def test_does_options_vertical_method_return_all_vertical_orientations
+  def test_does_options_maker_vertical_return_all_vertical_orientations
     computer_ships = Ships.new
     assert_equal ["A1", "B1"], computer_ships.options_maker_vertical("A", 1, "1", 2)
     assert_equal ["A1", "Z1"], computer_ships.options_maker_vertical("A", -1, "1", 2)
