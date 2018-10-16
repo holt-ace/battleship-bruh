@@ -13,12 +13,6 @@ class ShipsTest < Minitest::Test
     assert_instance_of Ships, canoe
   end
 
-  def test_computer_ships_dont_stack
-    destroyer = Ships.new
-    canoe = Ships.new
-    
-  end
-
   def test_does_options_maker_horizontal_return_all_horizontal_orientations
     computer_ships = Ships.new
     assert_equal ["A1", "A2"], computer_ships.options_maker_horizontal("A", 1, "1", 2)
