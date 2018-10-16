@@ -2,7 +2,7 @@ require './lib/game_boards'
 require 'pry'
 
 class Ships
-  attr_accessor :board_1, :computer_board, :computer_destroyer, :computer_canoe
+  attr_accessor :board_1, :computer_board, :computer_destroyer, :computer_canoe, :random_coord
   def initialize
     @board_1 = GameBoards.new
     @board_2 = GameBoards.new
@@ -10,6 +10,8 @@ class Ships
     @player_board = @board_2.hash_chart
     @computer_destroyer = []
     @computer_canoe = []
+    coordinates_array = @computer_board.keys
+    @random_coord = coordinates_array.sample
   end
 
   def options_maker_horizontal(letter, sign_of_one, number, ship_length) #fully functional
@@ -21,7 +23,7 @@ class Ships
     options
   end
 
-  def options_maker_vertical(letter, sign_of_one, number, ship_length) #broken
+  def options_maker_vertical(letter, sign_of_one, number, ship_length)
     options = []
     alphabet = [*'A'..'Z']
     ship_length.times do |index|
@@ -41,7 +43,8 @@ class Ships
   end
 
   def keys_to_strings
-    keys_as_strings = @computer_board.keys.map do |x|
+    coordinates_array = [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
+    keys_as_strings = coordinates_array.map do |x|
       x.to_s
     end
     keys_as_strings
@@ -61,24 +64,24 @@ class Ships
   end
 
   def computer_place_destroyer
-    coordinates_array = @computer_board.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
-    random_coord = coordinates_array.sample
-    comp_canoe_pos = validated_ship_positions(random_coord, 3).sample
-    validated_ship_positions(random_coord, 3)
+    comp_destroyer_pos = validate_orientations(create_orientations(@random_coord, 3)).sample
     @computer_board[comp_destroyer_pos[0]] = "S"
     @computer_board[comp_destroyer_pos[1]] = "S"
     @computer_board[comp_destroyer_pos[2]] = "S"
     @computer_destroyer << comp_destroyer_pos
-    puts "I have placed my destroyer, which is #{@computer_destroyer.flatten.length} units long."
+    puts "I have placed my destroyer, which is #{comp_destroyer_pos.length} units long."
   end
 
   def computer_place_canoe
-    coordinates_array = @computer_board.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
-    random_coord = coordinates_array.sample
-    comp_canoe_pos = validated_ship_positions(random_coord, 2).sample
-    @computer_board[comp_canoe_pos[0]] = "S"
-    @computer_board[comp_canoe_pos[1]] = "S"
-    puts "I have placed my canoe, which is #{@computer_canoe.length} units long."
+    comp_canoe_pos = validate_orientations(create_orientations(@random_coord, 2)).sample
+    if @computer_board.values_at(comp_canoe_pos[0], comp_canoe_pos[1]) == "S"
+      @computer_board[comp_canoe_pos[0]] = "S"
+      @computer_board[comp_canoe_pos[1]] = "S"
+      @computer_canoe << comp_canoe_pos
+    else
+      comp_canoe_pos
+    end
+    puts "I have placed my canoe, which is #{comp_canoe_pos.length} units long."
     sleep(3)
     puts "=" * 40
   end
@@ -86,7 +89,7 @@ class Ships
 ###################################################################################
   def player_place_canoe
     puts "YOUR TURN! Time to layout your two ships."
-    puts "The first is two units long \nand the second is three units long."
+    puts "The first is two units long (your Canoe) \nand the second is three units long (your Destroyer)."
     puts "The grid is 4x4 and has A1 \nin the top left and D4 in the bottom right."
     sleep(3)
     puts "Enter the coordinates for the two-unit ship seperated by a space."
