@@ -1,7 +1,8 @@
 require 'pry'
+require './lib/ships'
 
 class GameBoards
-  attr_accessor :hash_chart
+  attr_accessor :hash_chart, :computer_board
   def initialize
     @hash_chart = {
      A1: "x",
@@ -29,6 +30,7 @@ class GameBoards
      @row_6 = ["D", [@hash_chart[:D1]], [@hash_chart[:D2]], [@hash_chart[:D3]], [@hash_chart[:D4]]]
      @row_7 = @row_1
      @row_8 = ["S = Ship", "H = Hit", "M = Miss"]
+
   end
 
   def print_intro_board
@@ -49,4 +51,23 @@ class GameBoards
     print @row_8.join(', ')
     print "\n"
   end
+
+  def print_computer_board
+    print @row_1
+    print "\n"
+    print @row_2.join(' ')
+    print "\n"
+    @row_3[1..4].replace(@hash_chart => @computer_board)
+    print @row_3.join(' ')
+    print "\n"
+    print @row_4.join(' ')
+    print "\n"
+    print @row_5.join(' ')
+    print "\n"
+    print @row_6.join(' ')
+    print "\n"
+    print @row_7
+    print "\n"
+    print @row_8.join(', ')
+    print "\n"
 end

@@ -50,6 +50,20 @@ class Ships
     keys_as_strings
   end
 
+  def validate_canoe_orientations(orientations)
+    keys_to_strings
+    verified_coords = []
+    orientations.each do |element|
+      element.each do |x|
+        if keys_to_strings.include?(x) == false
+          orientations.delete(element)
+        end
+      end
+      prevent_stacking
+    end
+    orientations
+  end
+
   def validate_orientations(orientations)
     keys_to_strings
     verified_coords = []
@@ -65,25 +79,35 @@ class Ships
 
   def computer_place_destroyer
     comp_destroyer_pos = validate_orientations(create_orientations(@random_coord, 3)).sample
-    @computer_board[comp_destroyer_pos[0]] = "S"
-    @computer_board[comp_destroyer_pos[1]] = "S"
-    @computer_board[comp_destroyer_pos[2]] = "S"
+    @computer_board[comp_destroyer_pos[0].to_sym] = "S"
+    @computer_board[comp_destroyer_pos[1].to_sym] = "S"
+    @computer_board[comp_destroyer_pos[2].to_sym] = "S"
     @computer_destroyer << comp_destroyer_pos
     puts "I have placed my destroyer, which is #{comp_destroyer_pos.length} units long."
   end
 
+  def prevent_stacking
+    perfect = @computer_canoe.none? {|coord| @computer_destroyer.include?(coord)}
+    if perfect
+      computer_place_canoe
+    end
+  end
+
   def computer_place_canoe
     comp_canoe_pos = validate_orientations(create_orientations(@random_coord, 2)).sample
-    if @computer_board.values_at(comp_canoe_pos[0], comp_canoe_pos[1]) == "S"
-      @computer_board[comp_canoe_pos[0]] = "S"
-      @computer_board[comp_canoe_pos[1]] = "S"
-      @computer_canoe << comp_canoe_pos
+    if @computer_board.values_at(comp_canoe_pos[0]) == "S" || @computer_board.values_at(comp_canoe_pos[1]) == "S"
+      computer_place_canoe
+      return
     else
-      comp_canoe_pos
+      @computer_board[comp_canoe_pos[0].to_sym] = "S"
+      @computer_board[comp_canoe_pos[1].to_sym] = "S"
+      @computer_canoe << comp_canoe_pos
     end
     puts "I have placed my canoe, which is #{comp_canoe_pos.length} units long."
     sleep(3)
-    puts "=" * 40
+    binding.pry
+    p @board_1
+    # puts "=" * 40
   end
 
 ###################################################################################
