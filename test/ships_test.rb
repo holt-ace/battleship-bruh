@@ -39,8 +39,14 @@ class ShipsTest < Minitest::Test
   def test_it_validates_orientations
     computer_ships = Ships.new
     orientations = computer_ships.create_orientations("A1", 2)
-    assert_equal [["A1", "A2"], ["A1", "B1"]], computer_ships.validate_orientations(orientations)
+    assert_equal [["A1", "A2"], ["A1", "B1"]], computer_ships.validate_canoe_orientations(orientations)
   end
 
+  def test_it_places_ships_randomly_meeting_all_spec_rules
+    computer_ships = Ships.new
+    computer_ships.computer_place_destroyer
+    computer_ships.computer_place_canoe
+    assert_equal true, computer_ships.computer_board.values.count("S") == 5
+  end
 
 end
