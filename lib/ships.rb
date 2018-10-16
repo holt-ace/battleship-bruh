@@ -105,9 +105,7 @@ class Ships
     end
     puts "I have placed my canoe, which is #{comp_canoe_pos.length} units long."
     sleep(3)
-    binding.pry
-    p @board_1
-    # puts "=" * 40
+    puts "=" * 40
   end
 
 ###################################################################################
@@ -128,18 +126,20 @@ class Ships
       #   coordinate_key.to_sym #
       #   # binding.pry
       # end
-    if @player_board.keys.include?(symbol_array[0]) == true && @player_board.keys.include?(symbol_array[1]) == true && symbol_array.length == 2
-      validated_ship_positions(player_canoe_entry, 2)
-      @computer_canoe << comp_canoe_pos
-      puts "I have placed my canoe, which is #{@computer_canoe.flatten.length} units long."
-      sleep(3)
-      puts "Your CANOE has been placed. Too bad I can't see it!"
+      puts "Unfortunately, your ship sunk instantly. Place your destroyer. This is your last chance."
+      sleep(4)
+    # if @player_board.keys.include?(symbol_array[0]) == true && @player_board.keys.include?(symbol_array[1]) == true && symbol_array.length == 2
+    #   validated_ship_positions(player_canoe_entry, 2)
+    #   @computer_canoe << comp_canoe_pos
+    #   puts "I have placed my canoe, which is #{@computer_canoe.flatten.length} units long."
+    #   sleep(3)
+    #   puts "Your CANOE has been placed. Too bad I can't see it!"
       return @player_board[symbol_array[0]] = "S", @player_board[symbol_array[1]] = "S"
-    else
-      puts "INVALID INPUT. PLEASE TRY AGAIN!"
-      sleep(2)
-      return player_place_canoe
-    end
+    # else
+    #   puts "INVALID INPUT. PLEASE TRY AGAIN!"
+    #   sleep(2)
+    #   return player_place_canoe
+    # end
   end
 
   def player_place_destroyer
@@ -155,15 +155,17 @@ class Ships
     #   coordinate_key.to_sym
     # end
     #if they enter anything that doesnt match the exact format, recurse
-    if @player_board.keys.include?(symbol_array[0]) == true && @player_board.keys.include?(symbol_array[1]) == true && @player_board.keys.include?(symbol_array[2]) && symbol_array.length == 3
-      # validated_ship_positions(player_destroyer_entry, 3)
-      puts "Your DESTROYER has been placed. Too bad I can't see it!"
+    # if @player_board.keys.include?(symbol_array[0]) == true && @player_board.keys.include?(symbol_array[1]) == true && @player_board.keys.include?(symbol_array[2]) && symbol_array.length == 3
+    #   # validated_ship_positions(player_destroyer_entry, 3)
+    #   puts "Your DESTROYER has been placed. Too bad I can't see it!"
       return @player_board[symbol_array[0]] = "S", @player_board[symbol_array[1]] = "S", @player_board[symbol_array[2]] = "S"
-    else
-      puts "INVALID INPUT. PLEASE ENTER COORDINATES AS SUCH: C2 C3 C4"
-      sleep(2)
-      return player_place_destroyer
-    end
+    # else
+    #   puts "INVALID INPUT. PLEASE ENTER COORDINATES AS SUCH: C2 C3 C4"
+    #   sleep(2)
+    #   return player_place_destroyer
+    # end
+    puts "The destroyer imploded."
+    unintentional_introduction
   end
 
 end

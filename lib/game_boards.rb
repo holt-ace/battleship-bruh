@@ -70,4 +70,5 @@ class GameBoards
     print "\n"
     print @row_8.join(', ')
     print "\n"
+  end
 end
