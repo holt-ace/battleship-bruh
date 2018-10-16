@@ -11,29 +11,6 @@ class Ships
     @computer_destroyer = []
     @computer_canoe = []
   end
-#25-57: end syntax error
-  def computer_place_destroyer
-    coordinates_array = @computer_board.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
-    random_coord = coordinates_array.sample
-    validated_ship_positions(random_coord, 3)
-    @computer_board[comp_destroyer_pos[0]] = "S"
-    @computer_board[comp_destroyer_pos[1]] = "S"
-    @computer_board[comp_destroyer_pos[2]] = "S"
-    @computer_destroyer << comp_destroyer_pos
-    puts "I have placed my destroyer, which is #{@computer_destroyer.flatten.length} units long."
-  end
-
-  def computer_place_canoe
-    coordinates_array = @computer_board.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
-    random_coord = coordinates_array.sample
-    comp_canoe_pos = validated_ship_positions(random_coord, 2).sample
-    validated_ship_positions(random_coord, 3)
-    @computer_board[comp_canoe_pos[0]] = "S"
-    @computer_board[comp_canoe_pos[1]] = "S"
-    puts "I have placed my canoe, which is #{@computer_canoe.length} units long."
-    sleep(3)
-    puts "=" * 40
-  end
 
   def options_maker_horizontal(letter, sign_of_one, number, ship_length) #fully functional
     options = []
@@ -54,26 +31,57 @@ class Ships
     options
   end
 
-  def validated_ship_positions(coordinate, ship_length)
+  def create_orientations(coordinate, ship_length)
     right = options_maker_horizontal(coordinate[0], 1, coordinate[1], ship_length)
     left = options_maker_horizontal(coordinate[0], -1, coordinate[1], ship_length)
     down = options_maker_vertical(coordinate[0], 1, coordinate[1], ship_length)
     up = options_maker_vertical(coordinate[0], -1, coordinate[1], ship_length)
     orientations = [right, left, down, up]
-    reliable_orientations = orientations.map do |element|
-      if @computer_board.keys.include? (orientations) == false
-        reliable_orientations << element
-      end
-      reliable_orientations
-    end
-    orientations.flatten
+    orientations
   end
 
+  def keys_to_strings
+    keys_as_strings = @computer_board.keys.map do |x|
+      x.to_s
+    end
+    keys_as_strings
+  end
 
+  def validate_orientations(orientations)
+    keys_to_strings
+    verified_coords = []
+    orientations.each do |element|
+      element.each do |x|
+        if keys_to_strings.include?(x) == false
+          orientations.delete(element)
+        end
+      end
+    end
+    orientations
+  end
 
+  def computer_place_destroyer
+    coordinates_array = @computer_board.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
+    random_coord = coordinates_array.sample
+    comp_canoe_pos = validated_ship_positions(random_coord, 3).sample
+    validated_ship_positions(random_coord, 3)
+    @computer_board[comp_destroyer_pos[0]] = "S"
+    @computer_board[comp_destroyer_pos[1]] = "S"
+    @computer_board[comp_destroyer_pos[2]] = "S"
+    @computer_destroyer << comp_destroyer_pos
+    puts "I have placed my destroyer, which is #{@computer_destroyer.flatten.length} units long."
+  end
 
-  #last step is verifying that options_maker values are actually on the board
-
+  def computer_place_canoe
+    coordinates_array = @computer_board.keys # [:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4, :D1, :D2, :D3, :D4]
+    random_coord = coordinates_array.sample
+    comp_canoe_pos = validated_ship_positions(random_coord, 2).sample
+    @computer_board[comp_canoe_pos[0]] = "S"
+    @computer_board[comp_canoe_pos[1]] = "S"
+    puts "I have placed my canoe, which is #{@computer_canoe.length} units long."
+    sleep(3)
+    puts "=" * 40
+  end
 
 ###################################################################################
   def player_place_canoe
